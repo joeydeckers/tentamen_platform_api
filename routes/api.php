@@ -21,3 +21,6 @@ Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
 Route::get('user/{id}', 'API\UserController@getSpecifUser');
 
+Route::post('courses/create', 'API\CourseController@createCourse');
+Route::get('course/{id}', 'API\CourseController@getCourse');
+
