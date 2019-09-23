@@ -10,6 +10,11 @@ use Validator;
 
 class CourseController extends Controller
 {
+
+     /*
+        TO DO
+        Make it possible to upload powerpoint and voice recording.
+    */
     public function createCourse(Request $request){
         $rules = [
             'course_name'=>'required|max:55',
