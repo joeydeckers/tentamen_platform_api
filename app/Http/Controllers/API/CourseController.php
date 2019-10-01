@@ -22,7 +22,7 @@ class CourseController extends Controller
             'course_study'=>'required',
             'course_year'=> 'required|integer',
             'course_description'=> 'required',
-            'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040|required',
+            'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
             'course_uploader_id' => 'required',
         ];
 
@@ -32,11 +32,13 @@ class CourseController extends Controller
             return response()->json($validator->errors());
         }
 
-        $filename = $request->file('course_video')->getClientOriginalName();
-        $extension = File::extension($filename);
-        $newName = md5($filename.time());
-        $path = $request->file('course_video')->move(public_path("/upload"), $newName.".".$extension);
-        $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
+        if($request->file('course_video')){
+            $filename = $request->file('course_video')->getClientOriginalName();
+            $extension = File::extension($filename);
+            $newName = md5($filename.time());
+            $path = $request->file('course_video')->move(public_path("/upload"), $newName.".".$extension);
+            $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
+        }
         
         return Course::create([
             'course_name' => $request['course_name'],
