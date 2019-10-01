@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string('course_study');
             $table->integer('course_year');
             $table->string('course_description');
+            $table->string('course_time_summary');
             $table->string('course_video_url')->nullable();
             $table->string('course_powerpoint_url')->nullable();
             $table->string('course_audio_url')->nullable();

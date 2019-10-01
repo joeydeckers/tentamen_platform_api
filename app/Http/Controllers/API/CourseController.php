@@ -24,6 +24,7 @@ class CourseController extends Controller
             'course_description'=> 'required',
             'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
             'course_uploader_id' => 'required',
+            'course_time_summary' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -46,6 +47,7 @@ class CourseController extends Controller
             'course_study' => $request['course_study'],
             'course_year' => $request['course_year'],
             'course_description' => $request['course_description'],
+            'course_time_summary' => $request['course_time_summary'],
             'course_video_url' => $video_path,
             'course_uploader_id' => $request['course_uploader_id'],
         ]);
