@@ -23,6 +23,8 @@ class CourseController extends Controller
             'course_year'=> 'required|integer',
             'course_description'=> 'required',
             'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
+            'course_audio'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
+            'course_powerpoint'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
             'course_uploader_id' => 'required',
             'course_time_summary' => 'required'
         ];
@@ -38,6 +40,22 @@ class CourseController extends Controller
             $extension = File::extension($filename);
             $newName = md5($filename.time());
             $path = $request->file('course_video')->move(public_path("/upload"), $newName.".".$extension);
+            $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
+        }
+
+        if($request->file('course_audio')){
+            $filename = $request->file('course_audio')->getClientOriginalName();
+            $extension = File::extension($filename);
+            $newName = md5($filename.time());
+            $path = $request->file('course_audio')->move(public_path("/upload"), $newName.".".$extension);
+            $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
+        }
+
+        if($request->file('course_powerpoint')){
+            $filename = $request->file('course_powerpoint')->getClientOriginalName();
+            $extension = File::extension($filename);
+            $newName = md5($filename.time());
+            $path = $request->file('course_powerpoint')->move(public_path("/upload"), $newName.".".$extension);
             $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
         }
         
