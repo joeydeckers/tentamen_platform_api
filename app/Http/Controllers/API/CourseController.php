@@ -23,10 +23,7 @@ class CourseController extends Controller
             'course_year'=> 'required|integer',
             'course_description'=> 'required',
             'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
-            'course_audio'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
-            'course_powerpoint'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
             'course_uploader_id' => 'required',
-            'course_time_summary' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -43,21 +40,7 @@ class CourseController extends Controller
             $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
         }
 
-        if($request->file('course_audio')){
-            $filename = $request->file('course_audio')->getClientOriginalName();
-            $extension = File::extension($filename);
-            $newName = md5($filename.time());
-            $path = $request->file('course_audio')->move(public_path("/upload"), $newName.".".$extension);
-            $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
-        }
 
-        if($request->file('course_powerpoint')){
-            $filename = $request->file('course_powerpoint')->getClientOriginalName();
-            $extension = File::extension($filename);
-            $newName = md5($filename.time());
-            $path = $request->file('course_powerpoint')->move(public_path("/upload"), $newName.".".$extension);
-            $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
-        }
         
         return Course::create([
             'course_name' => $request['course_name'],
@@ -65,10 +48,15 @@ class CourseController extends Controller
             'course_study' => $request['course_study'],
             'course_year' => $request['course_year'],
             'course_description' => $request['course_description'],
-            'course_time_summary' => $request['course_time_summary'],
-            'course_video_url' => $video_path,
+            //'course_video_url' => $video_path,
+            'course_video_url' => 'http://techslides.com/demos/sample-videos/small.mp4',
             'course_uploader_id' => $request['course_uploader_id'],
         ]);
+    }
+
+    public function getAllCoursesBySchool($schoolname){
+        $course = Course::where('course_school', '=', $schoolname)->get();
+        return $course;
     }
 
     public function getCourse($id){

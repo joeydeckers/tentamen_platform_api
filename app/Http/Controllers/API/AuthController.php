@@ -43,9 +43,10 @@ class AuthController extends Controller
              'email' => 'email|required',
              'password' => 'required'
          ]);
+
         
          if(!auth()->attempt($loginData)) {
-             return response(['message'=>'Invalid credentials']);
+             return response(['message'=>'Wachtwoord en/of email zijn niet correct']);
          }
          $accessToken = auth()->user()->createToken('authToken')->accessToken;
          return response(['user' => auth()->user(), 'access_token' => $accessToken]);
