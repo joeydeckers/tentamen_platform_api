@@ -39,9 +39,7 @@ class CourseController extends Controller
             $path = $request->file('course_video')->move(public_path("/upload"), $newName.".".$extension);
             $video_path = "http://127.0.0.1:8000/upload/".$newName.".".$extension;
         }
-
-
-        
+    
         return Course::create([
             'course_name' => $request['course_name'],
             'course_school' => $request['course_school'],
@@ -56,6 +54,11 @@ class CourseController extends Controller
 
     public function getAllCoursesBySchool($schoolname){
         $course = Course::where('course_school', '=', $schoolname)->get();
+        return $course;
+    }
+
+    public function getRecentCourses(){
+        $course = Course::orderBy('created_at', 'desc')->take(4)->get();
         return $course;
     }
 

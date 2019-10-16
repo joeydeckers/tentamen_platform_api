@@ -21,6 +21,7 @@ Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
 Route::get('user/{id}', 'API\UserController@getSpecifUser');
 
+Route::get('course/recent', 'API\CourseController@getRecentCourses');
 Route::post('courses/create', 'API\CourseController@createCourse');
 Route::get('courses/getcoursesbyschool/{schoolname}', 'API\CourseController@getAllCoursesBySchool');
 Route::get('course/{id}', 'API\CourseController@getCourse');
