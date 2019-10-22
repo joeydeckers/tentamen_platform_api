@@ -42,8 +42,5 @@ class RequestedCourseController extends Controller
                 'times_requested' => 1
             ]);
         }
-
-
-
     }
 }

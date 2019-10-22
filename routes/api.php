@@ -28,6 +28,6 @@ Route::get('user/{id}', 'API\UserController@getSpecifUser');
 Route::get('course/recent', 'API\CourseController@getRecentCourses');
 Route::post('courses/create', 'API\CourseController@createCourse');
 Route::get('courses/getcoursesbyschool/{schoolname}', 'API\CourseController@getAllCoursesBySchool');
-Route::get('course/{id}', 'API\CourseController@getCourse');
+Route::get('cursus/{id}', 'API\CourseController@getCourse');
 
 
