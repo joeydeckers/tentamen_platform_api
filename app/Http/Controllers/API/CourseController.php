@@ -52,6 +52,13 @@ class CourseController extends Controller
         ]);
     }
 
+    public function courseSearch(Request $request){
+        $course = Course::where('course_school',$request['university'])->where('course_study', $request['study'])->get();
+
+        return $course;
+        
+    }
+
     public function getAllCoursesBySchool($schoolname){
         $course = Course::where('course_school', '=', $schoolname)->get();
         return $course;
@@ -64,7 +71,6 @@ class CourseController extends Controller
 
     public function getCourse($id){
         $course = Course::findOrFail($id);
-
         return $course;
     }
 }
