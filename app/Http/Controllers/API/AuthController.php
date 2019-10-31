@@ -20,6 +20,7 @@ class AuthController extends Controller
             'rating'=> 'required',
             'gender' => 'required',
             'birthdate' => 'required',
+            'course_ids' => 'required'
         ];
 
         $validatedData = $request->validate($rules);
@@ -31,6 +32,7 @@ class AuthController extends Controller
             return response()->json($validator->errors());
         }else{
             $validatedData['password'] = bcrypt($request->password);
+            $validatedData['course_ids'] = [];
             $user = User::create($validatedData);
             $accessToken = $user->createToken('authToken')->accessToken;
             return response(['user'=> $user, 'access_token'=> $accessToken]);

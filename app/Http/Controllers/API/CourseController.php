@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use File;
 use App\Course;
 use Validator;
-
+use App\User;
 
 class CourseController extends Controller
 {
@@ -54,9 +54,7 @@ class CourseController extends Controller
 
     public function courseSearch(Request $request){
         $course = Course::where('course_school',$request['university'])->where('course_study', $request['study'])->get();
-
         return $course;
-        
     }
 
     public function getAllCoursesBySchool($schoolname){
@@ -73,4 +71,6 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         return $course;
     }
+
+
 }

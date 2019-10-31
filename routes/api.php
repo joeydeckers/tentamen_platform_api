@@ -22,7 +22,7 @@ Route::post('askforcourse', 'API\RequestedCourseController@createRequestedCourse
 Route::get('courses/{university}/{study}', 'API\CourseController@courseSearch');
 
 
-
+Route::get('user/{id}/courses', 'API\UserController@getAllUserCourses');
 Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
 Route::get('user/{id}', 'API\UserController@getSpecifUser');
