@@ -43,4 +43,9 @@ class RequestedCourseController extends Controller
             ]);
         }
     }
+
+    public function getRequestedCourses($university){
+        $courses = Requested_course::where('university', '=', $university)->get();
+        return $courses;
+    }
 }

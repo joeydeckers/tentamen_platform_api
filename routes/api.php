@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('askforcourse', 'API\RequestedCourseController@createRequestedCourse');
+Route::get('getrequestedcourses/{university}', 'API\RequestedCourseController@getRequestedCourses');
+
 Route::get('courses/{university}/{study}', 'API\CourseController@courseSearch');
 
 
