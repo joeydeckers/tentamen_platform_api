@@ -24,6 +24,7 @@ class CourseController extends Controller
             'course_description'=> 'required',
             'course_video'=>'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040',
             'course_uploader_id' => 'required',
+            'course_school_url' => 'required'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -49,16 +50,17 @@ class CourseController extends Controller
             //'course_video_url' => $video_path,
             'course_video_url' => 'http://techslides.com/demos/sample-videos/small.mp4',
             'course_uploader_id' => $request['course_uploader_id'],
+            'course_school_url' => $request['course_school_url'],
         ]);
     }
 
-    public function courseSearch(Request $request){
-        $course = Course::where('course_school',$request['university'])->where('course_study', $request['study'])->get();
+    public function courseSearch($school_url, $study){
+        $course = Course::where('course_school_url',$school_url)->where('course_study', $study)->get();
         return $course;
     }
 
     public function getAllCoursesBySchool($schoolname){
-        $course = Course::where('course_school', '=', $schoolname)->get();
+        $course = Course::where('course_school_url', '=', $schoolname)->get();
         return $course;
     }
 
